@@ -2,6 +2,10 @@
     width: 100%;
     padding: 24px 0;
     background-color: lightgreen;
+
+    @media (max-width: 1260px) {
+        padding: 20px 0;
+    }
 }
 
 .header-container {
@@ -27,11 +31,113 @@
     font-weight: 500;
 }
 
-.header-menu a{
+.header-menu a {
     color: #000;
     text-decoration: none;
+    @media (max-width: 1260px){
+        color: #fff;
+    }
 }
 
-.header-menu a:hover{
+.header-menu a:hover {
     text-decoration: underline;
+}
+
+.menu-body {
+    @media (max-width: 1260px) {
+        position: fixed;
+        top: 0;
+        right: -200%;
+        height: 100%;
+        width: 100%;
+        z-index: 4;
+        background: rgba(0, 0, 0, 0.4);
+        opacity: 0;
+        transition: right 0.3s ease 0s,
+        opacity 0.3s;
+    }
+}
+
+.menu-body.active {
+    right: 0;
+    opacity: 1;
+}
+
+.menu-list {
+    display: flex;
+    gap: 24px;
+
+    @media (max-width: 1260px) {
+        flex-direction: column;
+        gap: 25px;
+        width: 320px;
+        height: 100%;
+        background: #000;
+        margin-left: auto;
+        justify-content: center;
+        padding-left: 40px;
+    }
+
+    @media (max-width: 540px) {
+        width: 180px;
+    }
+}
+
+.burger {
+    display: block;
+    position: fixed;
+    top: 27px;
+    right: 40px;
+    width: 36px;
+    height: 36px;
+    cursor: pointer;
+    z-index: 5;
+
+    @media (max-width: 768px) {
+        top: 18px;
+        right: 20px;
+    }
+
+    @media (max-width: 540px) {
+        right: 16px;
+    }
+
+    @media (min-width: 1260px) {
+        display: none;
+    }
+}
+
+.burger span {
+    transition: all 0.3s ease 0s;
+    top: calc(50% - 1px);
+    left: 6px;
+    position: absolute;
+    width: 27px;
+    height: 2px;
+    background-color: #000;
+}
+
+.burger span:first-child {
+    top: 9px;
+}
+
+.burger span:last-child {
+    top: auto;
+    bottom: 9px;
+}
+
+.burger.active span {
+    transform: scale(0);
+    background-color: #fff;
+}
+
+.burger.active span:first-child {
+    transform: rotate(-45deg);
+    top: calc(50% - 1px);
+}
+
+
+.burger.active span:last-child {
+    transform: rotate(45deg);
+    bottom: calc(50% - 1px);
 }

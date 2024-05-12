@@ -1,6 +1,24 @@
 <?php
 include("db.php");
+
+$submit = $_POST['submit'];
+
 $user_id = $_SESSION['user']['id'];
+
+$image_name = $_FILES['image']['name'];
+$image_type = $_FILES['image']['type'];
+$image_tmp_name = $_FILES['image']['tmp_name'];
+$image_size = $_FILES['image']['size'];
+$image_path = "img/upload/$image_name";
+
+if ($submit) {
+  $str_done_app = "UPDATE `applications` SET `image_done` = '$image_name', `status` = 'Решена' WHERE `id` = '$_GET[app]'";
+  $run_done_app = mysqli_query($connect, $str_done_app);
+  if ($run_done_app) {
+    move_uploaded_file($image_tmp_name, $image_path);
+    header("location: admin.php");
+  }
+}
 ?>
 <!doctype html>
 <html lang="en">
@@ -10,43 +28,20 @@ $user_id = $_SESSION['user']['id'];
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/application.css">
     <link rel="stylesheet" href="css/profile.css">
     <script src="js/script.js"></script>
-    <title><?php echo $_SESSION['user']['fullname']; ?></title>
+    <title>Решить проблему</title>
 </head>
 <body>
 <main class="main">
   <?php include("components/header.php") ?>
     <div class="main-container container">
         <div class="main-content">
-            <div class="title"><?php echo $_SESSION['user']['fullname']; ?></div>
-            <div class="subtitle">
-                Мои заявки
-                <select onchange="location = this.value;">
-                    <option value="">
-                        Выберите статус
-                    </option>
-                    <option value="/profile.php?id=<?php echo $user_id ?>">
-                        Все
-                    </option>
-                    <option value="/profile.php?id=<?php echo $user_id ?>&status=Новая">
-                        Новая
-                    </option>
-                    <option value="/profile.php?id=<?php echo $user_id ?>&status=Решена">
-                        Решена
-                    </option>
-                    <option value="/profile.php?id=<?php echo $user_id ?>&status=Отклонена">
-                        Отклонена
-                    </option>
-                </select>
-            </div>
+            <div class="title">Решить проблему</div>
             <div class="main-list">
               <?php
-              if ($_GET['status']) {
-                $str_out_applications = "SELECT * FROM `applications` WHERE `user_id` = '$user_id' AND `status` = '$_GET[status]' ORDER BY `applications`.`id` DESC";
-              } else {
-                $str_out_applications = "SELECT * FROM `applications` WHERE `user_id` = '$user_id' ORDER BY `applications`.`id` DESC";
-              }
+              $str_out_applications = "SELECT * FROM `applications` WHERE `id` = '$_GET[app]'";
               $run_out_applications = mysqli_query($connect, $str_out_applications);
               while ($out_applications = mysqli_fetch_array($run_out_applications)) {
                 switch ($out_applications['status']) {
@@ -71,6 +66,15 @@ $user_id = $_SESSION['user']['id'];
                   </article>
               <?php } ?>
             </div>
+            <form action="" class="form" method="POST" enctype="multipart/form-data">
+                <div class="form-block">
+                    <div class="form-label">Для решения проблемы загрузите фотографию</div>
+                    <input type="file" name="image" class="form-file" accept="image/*" required>
+                </div>
+                <div class="form-block">
+                    <input type="submit" name="submit" value="Решить проблему" class="form-btn">
+                </div>
+            </form>
         </div>
     </div>
   <?php include("components/footer.php") ?>

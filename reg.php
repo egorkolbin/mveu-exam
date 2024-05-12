@@ -48,6 +48,7 @@ if ($reg) {
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/reg.css">
+    <script src="js/script.js"></script>
     <title>Регистрация</title>
 </head>
 <body>

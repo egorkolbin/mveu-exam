@@ -1,11 +1,7 @@
 .main-list {
     display: grid;
-    grid-template-columns:  repeat(2, 1fr);
-    gap: 20px;
-
-    @media (max-width: 960px) {
-        grid-template-columns: 1fr;
-    }
+    grid-template-columns:  repeat(1, 1fr);
+    gap: 20px
 }
 
 .application {
@@ -21,6 +17,18 @@
 .subtitle {
     font-size: 24px;
     font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    @media (max-width: 960px) {
+        font-size: 20px;
+    }
+}
+
+.subtitle select{
+    height: 32px;
+    outline: none;
+    color: #000;
 }
 
 .application-title {
@@ -28,7 +36,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-top: auto;
+    gap: 20px;
 
     span {
         font-size: 20px;
@@ -76,34 +84,27 @@
     padding: 0 20px;
 }
 
-.application-img {
-    position: relative;
-    width: 100%;
+.menu{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
 }
 
-.application-img:hover .img-done {
-    opacity: 0;
+.menu a {
+    text-decoration: underline;
+    color: #000;
+    font-weight: 500;
 }
 
-.application-img:hover .img {
-    opacity: 1;
+.cat-list{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
 
-.application .img-done {
-    min-height: 280px;
-    width: 100%;
-    opacity: 1;
-    transition: all 0.3s linear;
-    object-fit: cover;
-}
-
-.application .img {
-    transition: all 0.3s linear;
-    opacity: 0;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+.cat-list .cat{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }

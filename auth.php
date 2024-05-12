@@ -31,7 +31,8 @@ if ($reg) {
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/auth.css">
-    <title>Главная</title>
+    <script src="js/script.js"></script>
+    <title>Авторизация</title>
 </head>
 <body>
 <main class="main">
